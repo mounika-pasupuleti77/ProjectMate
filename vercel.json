@@ -1,10 +1,10 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
+  "buildCommand": "node -e \"const fs=require('fs'),cp=require('child_process'); if(fs.existsSync('frontend')){ cp.execSync('cd frontend && npm install && npm run build',{stdio:'inherit'}); }else{ cp.execSync('npm run build',{stdio:'inherit'}); fs.mkdirSync('frontend',{recursive:true}); fs.cpSync('dist','frontend/dist',{recursive:true}); }\"",
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "destination": "https://projectmate-3kx9.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",

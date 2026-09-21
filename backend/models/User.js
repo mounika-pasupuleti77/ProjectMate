@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema(
     role: { 
       type: String, 
       enum: ['student', 'guide', 'admin'], 
-      default: 'student' 
+      default: 'student',
+      lowercase: true
     },
     college: { type: String, default: 'National Institute of Technology' },
     department: { type: String, default: 'Computer Science & Engineering' },
