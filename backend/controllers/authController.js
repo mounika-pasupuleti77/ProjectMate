@@ -51,6 +51,9 @@ const registerUser = async (req, res) => {
       res.status(400).json({ message: 'Invalid user data provided' });
     }
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'An account with this email address already exists. Please log in instead.' });
+    }
     res.status(500).json({ message: error.message });
   }
 };
