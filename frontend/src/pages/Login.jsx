@@ -21,7 +21,13 @@ const Login = () => {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password');
+      if (typeof err.response?.data?.message === 'string') {
+        setError(err.response.data.message);
+      } else if (err.response?.status === 401) {
+        setError('Invalid email or password');
+      } else {
+        setError('Backend server connection error. Please make sure the backend server is running (cd backend && npm run dev).');
+      }
     } finally {
       setLoading(false);
     }

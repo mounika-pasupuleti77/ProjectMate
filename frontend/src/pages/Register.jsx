@@ -63,12 +63,10 @@ const Register = () => {
       });
       navigate('/dashboard');
     } catch (err) {
-      if (err.response?.data?.message) {
+      if (typeof err.response?.data?.message === 'string') {
         setError(err.response.data.message);
-      } else if (err.code === 'ERR_NETWORK' || !err.response) {
-        setError('Cannot connect to backend server. Please make sure the backend server is running (cd backend && npm run dev).');
       } else {
-        setError(err.message || 'Registration failed');
+        setError('Backend server connection error. Please make sure the backend server is running (cd backend && npm run dev).');
       }
     } finally {
       setLoading(false);
